@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Engineering Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .question input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Social Engineering Quiz</h1>
+  <form id="quizForm">
+    <!-- Question 1 -->
+    <div class="question">
+      <label>1. What are the three main steps attackers follow in a social engineering attack?</label>
+      <input type="radio" name="q1" value="a"> a) Research, Manipulation, and Hacking<br>
+      <input type="radio" name="q1" value="b"> b) Discovery and Investigation, Deception and Hook, The Attack<br>
+      <input type="radio" name="q1" value="c"> c) Planning, Testing, and Execution<br>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+      <label>2. During the discovery and investigation phase, how do attackers gather information?</label>
+      <input type="radio" name="q2" value="a"> a) Social media, public records, and dumpster diving<br>
+      <input type="radio" name="q2" value="b"> b) Direct phone calls to targets<br>
+      <input type="radio" name="q2" value="c"> c) Hacking into secure databases<br>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+      <label>3. What is the goal of the deception and hook step in a social engineering attack?</label>
+      <input type="radio" name="q3" value="a"> a) To gather more technical data for hacking<br>
+      <input type="radio" name="q3" value="b"> b) To provoke victims to act emotionally and impulsively<br>
+      <input type="radio" name="q3" value="c"> c) To disable security systems<br>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+      <label>4. What makes spear phishing different from regular phishing?</label>
+      <input type="radio" name="q4" value="a"> a) Spear phishing uses fake phone calls instead of emails<br>
+      <input type="radio" name="q4" value="b"> b) Spear phishing involves personalized messages tailored to specific victims<br>
+      <input type="radio" name="q4" value="c"> c) Spear phishing targets financial institutions exclusively<br>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+      <label>5. In vishing attacks, how do attackers typically deceive victims?</label>
+      <input type="radio" name="q5" value="a"> a) They send text messages pretending to be a trusted entity<br>
+      <input type="radio" name="q5" value="b"> b) They use fraudulent emails to trick victims into revealing passwords<br>
+      <input type="radio" name="q5" value="c"> c) They use phone calls, posing as bank representatives or IT support<br>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="question">
+      <label>6. What happens when victims click links in smishing messages?</label>
+      <input type="radio" name="q6" value="a"> a) They install malware or are directed to fake websites to steal credentials<br>
+      <input type="radio" name="q6" value="b"> b) Their phone sends the message to all contacts automatically<br>
+      <input type="radio" name="q6" value="c"> c) Their data is encrypted immediately<br>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="question">
+      <label>7. How does pretexting work in social engineering attacks?</label>
+      <input type="radio" name="q7" value="a"> a) Attackers use malware to extract information from computers<br>
+      <input type="radio" name="q7" value="b"> b) Attackers create believable fake scenarios to gain sensitive information<br>
+      <input type="radio" name="q7" value="c"> c) Attackers impersonate victims for physical access<br>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="question">
+      <label>8. What human behavior does baiting exploit?</label>
+      <input type="radio" name="q8" value="a"> a) Distrust of unfamiliar sources<br>
+      <input type="radio" name="q8" value="b"> b) Overconfidence in one’s digital security measures<br>
+      <input type="radio" name="q8" value="c"> c) Curiosity or the desire for free items<br>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="question">
+      <label>9. Why are quishing attacks difficult to detect?</label>
+      <input type="radio" name="q9" value="a"> a) QR codes appear harmless and are widely trusted<br>
+      <input type="radio" name="q9" value="b"> b) They require advanced cybersecurity systems to identify<br>
+      <input type="radio" name="q9" value="c"> c) They only occur during specific online transactions<br>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="question">
+      <label>10. What is tailgating in social engineering attacks?</label>
+      <input type="radio" name="q10" value="a"> a) Sending fake emails about parking violations<br>
+      <input type="radio" name="q10" value="b"> b) Physically following someone into a restricted area without proper authorization<br>
+      <input type="radio" name="q10" value="c"> c) Using fake IDs to access restricted systems<br>
+    </div>
+
+    <button type="button" onclick="checkAnswers()">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    async function fetchFlag() {
+      try {
+        const response = await fetch("flag.txt");
+        if (!response.ok) {
+          throw new Error("Failed to fetch flag");
+        }
+        return await response.text();
+      } catch (error) {
+        console.error("Error fetching flag:", error);
+        return null;
+      }
+    }
+
+    async function checkAnswers() {
+      const correctAnswers = {
+        q1: "b",
+        q2: "a",
+        q3: "b",
+        q4: "b",
+        q5: "c",
+        q6: "a",
+        q7: "b",
+        q8: "c",
+        q9: "a",
+        q10: "b",
+      };
+
+      let allCorrect = true;
+      for (const [question, answer] of Object.entries(correctAnswers)) {
+        const selected = document.querySelector(`input[name="${question}"]:checked`);
+        if (!selected || selected.value !== answer) {
+          allCorrect = false;
+          break;
+        }
+      }
+
+      const resultDiv = document.getElementById("result");
+      if (allCorrect) {
+        const flag = await fetchFlag();
+        if (flag) {
+          resultDiv.textContent = `Congratulations! You got all answers correct. The flag is: ${flag}`;
+        } else {
+          resultDiv.textContent = "Error: Could not retrieve the flag. Please try again.";
+        }
+      } else {
+        resultDiv.textContent = "Sorry, some answers are incorrect. Please try again!";
+      }
+    }
+  </script>
+</body>
+</html>
